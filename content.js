@@ -4,7 +4,7 @@ const notesToGPA = (notes) => {
     let totalNote = 0;
 
     if (notes.length == 0)
-        return "No Content";
+        return "no notes yet";
     Object.entries(notes).forEach(([courseNumber, courseNotes]) => {
         courseNotes.forEach((e) => {
             totalWeights += e.weight;
