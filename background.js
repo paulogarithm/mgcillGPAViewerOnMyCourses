@@ -191,7 +191,6 @@ const onInfoReceived = async (data, courseNumber, tabId) => {
     const res = await parseGradings(tabId, content);
 
     // save the notes
-    // console.log("course found: ", data.properties?.name || data, courseNumber);
     chrome.storage.local.get(["notes"], (result) => {
         const notes = result.notes || {};
         notes[courseNumber] = res;
@@ -206,18 +205,6 @@ const onInfoReceived = async (data, courseNumber, tabId) => {
             chrome.tabs.sendMessage(tab.id, { type: "NOTE_UPDATE" });
         });
     });
-
-    // res.forEach((e) => {
-    //     totalWeights += e.weight;
-    //     totalNote += e.grade * e.weight;
-    // });
-
-    // chrome.storage.session.set({ gpa: (totalNote / totalWeights) * 4 });
-    // chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-    //     tabs.forEach(tab => {
-    //         chrome.tabs.sendMessage(tab.id, { type: "GPA_UPDATE", value: (totalNote / totalWeights) * 4 });
-    //     });
-    // });
 };
 
 chrome.runtime.onMessage.addListener((msg, sender) => {

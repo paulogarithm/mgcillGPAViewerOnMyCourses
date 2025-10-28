@@ -44,12 +44,9 @@ setTimeout(() => {
     // h2.textContent = 'GPA: Undefined';
     chrome.storage.local.get(["notes"], (res) => {
         const notes = res.notes || {};
-        console.log("Getting notes: ", notes);
-
         const h2 = document.getElementById('my_gpa_text');
         if (!h2)
             return;
-        console.log("changing content...")
         h2.textContent = `GPA: ${notesToGPA(notes)}`;
     });
 
@@ -62,11 +59,8 @@ setTimeout(() => {
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (message.type === "NOTE_UPDATE") {
-        console.log("Mise à jour des notes détectée !");
         chrome.storage.local.get(["notes"], (res) => {
             const notes = res.notes || {};
-            console.log("Nouvelles notes :", notes);
-
             const h2 = document.getElementById('my_gpa_text');
             if (!h2)
                 return;
