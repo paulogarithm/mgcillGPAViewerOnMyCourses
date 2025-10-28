@@ -1,0 +1,40 @@
+{
+    "manifest_version": 3,
+    "name": "My McGill GPA",
+    "version": "1.44",
+    "permissions": [
+        "scripting",
+        "tabs",
+        "storage",
+        "activeTab"
+    ],
+    "background": {
+        "service_worker": "background.js"
+    },
+    "host_permissions": [
+        "https://mycourses2.mcgill.ca/*",
+        "https://*.brightspace.com/*",
+        "https://*.api.brightspace.com/*"
+    ],
+    "content_scripts": [
+        {
+            "matches": [
+                "https://mycourses2.mcgill.ca/*",
+                "https://*.brightspace.com/*",
+                "https://*.api.brightspace.com/*"
+            ],
+            "js": [
+                "content-script-relay.js"
+            ],
+            "run_at": "document_start"
+        },
+        {
+            "matches": [
+                "https://mycourses2.mcgill.ca/d2l/home"
+            ],
+            "js": [
+                "content.js"
+            ]
+        }
+    ]
+}
